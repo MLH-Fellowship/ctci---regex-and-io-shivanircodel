@@ -1,10 +1,12 @@
-with open("./inputs/emails.csv", 'r') as file:
-    reader = csv.reader(file.readlines())
+email_file = open("../inputs/emails.csv", "r")
+email_reader = csv.reader(email_file)
 
-with open('emails_solution.csv', 'w') as outf:
-    writer = csv.writer(outf)
-    for line in reader:
-        temp_line = line
-        temp_line[1] = re.sub("@[a-z0-9.-]+(.)?[a-z]{2,4}", "@mlh.io", line[1])
-        writer.writerow(temp_line)
-    writer.writerows(reader)
+out_file = open("emails_new.csv", "w")
+out_writer = csv.writer(out_file)
+for row in email_reader:
+    email = row[1]
+    row[1] = re.sub("@gmail\.com", "@mlh.io", row[1])
+    out_writer.writerow(row)
+
+email_file.close()
+out_file.close()
